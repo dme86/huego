@@ -1,0 +1,7 @@
+alertmanager:
+  enabled: true
+
+server:
+  service:
+    type: ClusterIP
+    port: 80
