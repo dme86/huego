@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: huego-deployment
+  namespace: monitoring
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: huego
+  template:
+    metadata:
+      labels:
+        app: huego
+    spec:
+      containers:
+      - name: huego-container
+        image: ghcr.io/dme86/huego:latest
+        ports:
+        - containerPort: 8181
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: huego-service
+  namespace: monitoring
+spec:
+  selector:
+    app: huego
+  ports:
+  - protocol: TCP
+    port: 8181
+    targetPort: 8181
+  type: ClusterIP
+
