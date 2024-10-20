@@ -24,5 +24,5 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
     - name: Build and Push Docker image
-      run: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t ghcr.io/${{ github.repository }}:latest --push .
+      run: docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/${{ github.repository }}:latest --push .
 
