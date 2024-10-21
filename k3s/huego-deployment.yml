@@ -12,12 +12,27 @@ spec:
     metadata:
       labels:
         app: huego
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: huego-container
         image: ghcr.io/dme86/huego@sha256:f473a4c8ace8023cab8c8bda242aeba501f7bb6a9b4a08aaf28b851b6f75d91b ## arm64
         ports:
-        - containerPort: 8181
+        - containerPort: 8000
+        env:
+        - name: HUE_BRIDGE_IP
+          valueFrom:
+            secretKeyRef:
+              name: huego-secrets
+              key: HUE_BRIDGE_IP
+        - name: HUE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: huego-secrets
+              key: HUE_API_KEY
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +44,7 @@ spec:
     app: huego
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8000
+    targetPort: 8000
   type: ClusterIP
 
