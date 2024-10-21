@@ -1,7 +1,10 @@
 # Huego
 
 **Huego** is a Prometheus exporter for Philips Hue sensors, written in Go. It collects temperature readings from Hue devices and exposes them as Prometheus metrics for easy integration into your monitoring stack.
+
 Phase: Early Alpha
+
+![enter image description here](https://i.imgur.com/n2EsiFM.png)
 
 ## Features
 
@@ -67,3 +70,4 @@ If you are running Kubernetes (e.g., with k3d), deploy Huego as a pod or service
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
