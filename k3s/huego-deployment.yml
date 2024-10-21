@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: huego-container
-        image: ghcr.io/dme86/huego@sha256:f473a4c8ace8023cab8c8bda242aeba501f7bb6a9b4a08aaf28b851b6f75d91b ## arm64
+        image: ghcr.io/dme86/huego:0.1.0@sha256:10034796e35a248941e3d83eee8b48fd1d9114824f9749f679717f63561c1167 # arm64
         ports:
         - containerPort: 8000
         env:
@@ -33,6 +33,11 @@ spec:
             secretKeyRef:
               name: huego-secrets
               key: HUE_API_KEY
+        - name: SENSOR_ROOM_MAPPING
+          valueFrom:
+            secretKeyRef:
+              name: huego-mapping-secret
+              key: SENSOR_ROOM_MAPPING
 ---
 apiVersion: v1
 kind: Service
