@@ -19,25 +19,40 @@ spec:
     spec:
       containers:
       - name: huego-container
-        image: ghcr.io/dme86/huego:0.1.0@sha256:10034796e35a248941e3d83eee8b48fd1d9114824f9749f679717f63561c1167 # arm64
+        image: ghcr.io/dme86/huego:0.2.0@sha256:c92b28cee3497d611a56365e9a3f05f9495c8c50c5d049e385c944aab474c8cf
         ports:
         - containerPort: 8000
         env:
-        - name: HUE_BRIDGE_IP
-          valueFrom:
-            secretKeyRef:
-              name: huego-secrets
-              key: HUE_BRIDGE_IP
-        - name: HUE_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: huego-secrets
-              key: HUE_API_KEY
-        - name: SENSOR_ROOM_MAPPING
-          valueFrom:
-            secretKeyRef:
-              name: huego-mapping-secret
-              key: SENSOR_ROOM_MAPPING
+          - name: HUE_BRIDGE_IP
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: HUE_BRIDGE_IP
+          - name: HUE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: HUE_API_KEY
+          - name: SENSOR_ROOM_MAPPING
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: SENSOR_ROOM_MAPPING
+          - name: WEATHER_LATITUDE
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: WEATHER_LATITUDE
+          - name: WEATHER_LONGITUDE
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: WEATHER_LONGITUDE
+          - name: WEATHER_FETCH_INTERVAL
+            valueFrom:
+              secretKeyRef:
+                name: huego-mapping-secret
+                key: WEATHER_FETCH_INTERVAL
 ---
 apiVersion: v1
 kind: Service
