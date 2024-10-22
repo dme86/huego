@@ -1,6 +1,9 @@
 # Binaries
 huego
 
+# Secrets
+*secret*.yaml
+
 # OS-specific files
 .DS_Store
 Thumbs.db
